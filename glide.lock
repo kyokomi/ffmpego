@@ -1,0 +1,6 @@
+hash: c1aff946f3c8eadbee8d65139b11609079f4c4771fcc1b78b3d4420e7895289b
+updated: 2016-12-13T23:55:44.229228638+09:00
+imports:
+- name: github.com/grafov/m3u8
+  version: 7b864e5a29bf4d2776e9a668e0f6dcd522689e1c
+testImports: []

@@ -15,10 +15,6 @@ func newFFMPEG(inputFilePath string) (*ffmpeg, error) {
 	return &ffmpeg{exec.Command(cmdPath, "-i", inputFilePath)}, nil
 }
 
-func (f *ffmpeg) setDir(dir string) {
-	f.Dir = dir
-}
-
 func (f *ffmpeg) setArgs(args ...string) {
 	f.Args = append(f.Args, args...)
 }

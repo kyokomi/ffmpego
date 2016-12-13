@@ -1,0 +1,4 @@
+package: github.com/kyokomi/ffmpego
+import:
+- package: github.com/grafov/m3u8
+  version: v0.9
