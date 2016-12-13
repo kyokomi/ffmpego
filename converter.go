@@ -3,6 +3,7 @@ package ffmpego
 import (
 	"fmt"
 	"path"
+	"log"
 )
 
 const tmpConcatAACFileName = "concat.aac"
@@ -16,7 +17,7 @@ func convertTsToMP3(aacDirPath, outputFilePath string) error {
 }
 
 func convertConcatAACFile(inputDirPath, outputFilePath string) error {
-	concatFileNames, err := ConcatFileNames(inputDirPath)
+	concatFileNames, err := concatFileNames(inputDirPath)
 	if err != nil {
 		return err
 	}
@@ -28,8 +29,12 @@ func convertConcatAACFile(inputDirPath, outputFilePath string) error {
 	}
 
 	f.setArgs("-c", "copy")
-	// TODO: console出力内容をlogに吐く
-	return f.run(outputFilePath)
+	result, err := f.execute(outputFilePath)
+	if err != nil {
+		return err
+	}
+	log.Println(string(result))
+	return nil
 }
 
 func convertAACToMP3(inputFilePath, outputFilePath string) error {
@@ -43,6 +48,10 @@ func convertAACToMP3(inputFilePath, outputFilePath string) error {
 		"-ac", "2",
 		"-q:a", "2",
 	)
-	// TODO: console出力内容をlogに吐く
-	return f.run(outputFilePath)
+	result, err := f.execute(outputFilePath)
+	if err != nil {
+		return err
+	}
+	log.Println(string(result))
+	return nil
 }

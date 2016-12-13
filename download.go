@@ -10,15 +10,16 @@ import (
 	"sync"
 )
 
-// TODO: 設定とかで変更できるように適当に見直す
-const (
-	maxAttempts   = 4
-	maxGoroutines = 16
-)
+func bulkDownload(maxAttempts, maxGoroutines int, list []string, output string) error {
+	if maxAttempts <= 0 {
+		maxAttempts = defaultMaxAttempts
+	}
 
-var sem = make(chan struct{}, maxGoroutines)
+	if maxGoroutines <= 0 {
+		maxGoroutines = defaultMaxGoroutines
+	}
 
-func BulkDownload(list []string, output string) error {
+	var sem = make(chan struct{}, maxGoroutines)
 	var errFlag bool
 	var wg sync.WaitGroup
 
@@ -30,7 +31,6 @@ func BulkDownload(list []string, output string) error {
 			var err error
 			for i := 0; i < maxAttempts; i++ {
 				sem <- struct{}{}
-				// TODO: 相対Pathとか考慮できてない
 				err = download(link, output)
 				<-sem
 				if err == nil {

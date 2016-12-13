@@ -12,7 +12,8 @@ func main() {
 	outputPath := flag.String("o", "result.mp3", "output file path")
 	flag.Parse()
 
-	if err := ffmpego.Download(*uri, *outputPath); err != nil {
+	fgo := ffmpego.New()
+	if err := fgo.M3U8ConvertMP3(*uri, *outputPath); err != nil {
 		log.Fatalln(err)
 	}
 }

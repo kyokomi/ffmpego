@@ -23,12 +23,7 @@ func (f *ffmpeg) setArgs(args ...string) {
 	f.Args = append(f.Args, args...)
 }
 
-func (f *ffmpeg) run(output string) error {
+func (f *ffmpeg) execute(output string) ([]byte, error) {
 	f.Args = append(f.Args, output)
-	return f.Run()
-}
-
-func (f *ffmpeg) start(output string) error {
-	f.Args = append(f.Args, output)
-	return f.Start()
+	return f.CombinedOutput()
 }

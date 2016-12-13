@@ -15,7 +15,7 @@ func (f sliceFileInfo) Swap(i, j int) { f[i], f[j] = f[j], f[i] }
 
 func (f sliceFileInfo) Less(i, j int) bool { return naturalComp(f[i].Name(), f[j].Name(), false) < 0 }
 
-func ConcatFileNames(inputDirPath string) (string, error) {
+func concatFileNames(inputDirPath string) (string, error) {
 	files, err := ioutil.ReadDir(inputDirPath)
 	if err != nil {
 		return "", err
