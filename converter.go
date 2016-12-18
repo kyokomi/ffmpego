@@ -49,9 +49,9 @@ func convertAACToMP3(inputFilePath, outputFilePath string) error {
 		"-q:a", "2",
 	)
 	result, err := f.execute(outputFilePath)
+	log.Println(string(result))
 	if err != nil {
 		return err
 	}
-	log.Println(string(result))
 	return nil
 }
